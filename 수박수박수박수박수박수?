@@ -1,0 +1,19 @@
+public class Solution {
+    public string solution(int n) {
+        string answer = "";
+        int quotient, rest;
+
+        quotient = n / 2;
+        rest = n % 2;
+
+        while(quotient>0)
+        {
+            answer += "수박";
+            quotient--;
+        }
+
+        if (rest == 1) answer += "수";
+
+        return answer;
+    }
+}
