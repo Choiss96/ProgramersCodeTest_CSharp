@@ -1,0 +1,39 @@
+using System;
+
+class Solution
+{
+    public int solution(int[] nums)
+    {
+        int answer = -1;
+
+        int a = 0;
+
+        for (int i = 0; i < nums.Length; i++)
+            for (int j = i + 1; j < nums.Length; j++)
+                for (int k = j + 1; k < nums.Length; k++)
+                    if (Func(nums[i] + nums[j] + nums[k]))
+                        a++;
+
+        return a;
+    }
+
+    private bool Func(int num)
+    {
+        bool trigger = false;
+        if (num == 1)
+            return false;
+
+        for (int i = 2; i * i <= num; i++)
+        {
+            if (num % i == 0)
+            {
+                trigger = true;
+                break;
+            }
+        }
+        if (trigger)
+            return false;
+        else
+            return true;
+    }
+}
