@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+    public string solution(string[] survey, int[] choices)
+    {
+        string answer = "";
+        int[] arr = { 0, 0, 0, 0 };
+
+        string[] str = { "RT", "CF", "JM", "AN" };
+
+        Dictionary<char, int> map = new Dictionary<char, int>();
+        map.Add('R', 0);
+        map.Add('T', 0);
+        map.Add('C', 0);
+        map.Add('F', 0);
+        map.Add('J', 0);
+        map.Add('M', 0);
+        map.Add('A', 0);
+        map.Add('N', 0);
+
+        for (int i = 0; i < survey.Length; i++)
+        {
+            if (choices[i] <= 3)
+                map[survey[i][0]] = map[survey[i][0]] + (4 - choices[i]);
+            else if (choices[i] >= 5)
+                map[survey[i][1]] = map[survey[i][1]] + (choices[i] - 4);
+        }
+        if (map['R'] >= map['T'])
+            answer += 'R';
+        else
+            answer += 'T';
+
+        if (map['C'] >= map['F'])
+            answer += 'C';
+        else
+            answer += 'F';
+
+        if (map['J'] >= map['M'])
+            answer += 'J';
+        else
+            answer += 'M';
+
+        if (map['A'] >= map['N'])
+            answer += 'A';
+        else
+            answer += 'N';
+
+
+        return answer;
+    }
+}
