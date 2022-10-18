@@ -1,0 +1,26 @@
+string answer = "";
+        int[] x_num = new int[10];
+        int[] y_num = new int[10];
+
+        for (int i = 0; i < X.Length; i++)
+            x_num[int.Parse(X[i].ToString())]++;
+        for (int i = 0; i < Y.Length; i++)
+            y_num[int.Parse(Y[i].ToString())]++;
+
+        for (int i = 9; i >= 0; i--)
+        {
+            if (x_num[i] == 0 || y_num[i] == 0)
+                continue;
+            int a = Math.Min(x_num[i], y_num[i]);
+
+            answer += String.Concat(Enumerable.Repeat(i, a));
+        }
+
+        if (answer.Length == 0)
+            return "-1";
+
+        if (answer[0] == '0')
+            return "0";
+
+        return answer;
+    }
