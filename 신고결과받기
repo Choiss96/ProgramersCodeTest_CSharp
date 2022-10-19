@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Solution {
-    public List<int> solution(string[] id_list, string[] report, int k)
+    public int[] solution(string[] id_list, string[] report, int k)
     {
-        List<int> answer = new List<int>();
-
-        Dictionary<string, int> dict_Report = new Dictionary<string, int>();
-        Dictionary<string, int> dict_Mail = new Dictionary<string, int>();
-
-        Dictionary<string, List<string>> dict_Send = new Dictionary<string, List<string>>();
         string[] arr_Str;
         List<string> str_Ban = new List<string>();
-
-
-        //List<string> list = new List<string>();
+        Dictionary<string, int> dict_Report = new Dictionary<string, int>();
+        Dictionary<string, int> dict_Mail = new Dictionary<string, int>();
+        Dictionary<string, List<string>> dict_Send = new Dictionary<string, List<string>>();
 
         for (int i = 0; i < id_list.Length; i++)
         {
@@ -45,24 +40,14 @@ public class Solution {
         }
 
         foreach (var v in dict_Report)
-        {
             if (v.Value >= k)
                 str_Ban.Add(v.Key);
-        }
 
         foreach (var v1 in str_Ban)
-        {
             foreach (var v2 in dict_Send)
                 if (v2.Value.Contains(v1))
                     dict_Mail[v2.Key]++;
-        }
 
-
-        for (int i = 0; i < id_list.Length; i++)
-        {
-            answer.Add(dict_Mail[id_list[i]]);
-        }
-
-        return answer;
+        return dict_Mail.Values.ToArray();
     }
 }
