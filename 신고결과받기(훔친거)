@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution
+{
+    public class IdInfo
+    {
+        public int index;
+        public int reportedCount;
+        public List<string> reportList;
+        public IdInfo(int idx) { index = idx; reportedCount = 0; reportList = new List<string>(); }
+        public bool AddReportId(string id)
+        {
+            if (reportList.Contains(id)) return false;
+            reportList.Add(id); return true;
+        }
+        public void Reported() => reportedCount += 1;
+    }
+
+    public static int[] solution(string[] id_list, string[] report, int k)
+    {
+        int len = id_list.Length;
+        int[] answer = new int[len];
+        Dictionary<string, IdInfo> dict_IdInfo = new Dictionary<string, IdInfo>();
+
+        for (int i = 0; i < len; i++)
+        {
+            var id = id_list[i];
+            answer[i] = 0;
+            dict_IdInfo.Add(id, new IdInfo(i));
+        }
+
+        foreach (var v in report)
+        {
+            var split = v.Split(' '); var reporter = split[0]; var reported = split[1];
+            if (dict_IdInfo[reporter].AddReportId(reported))
+                dict_IdInfo[reported].Reported();
+        }
+
+        foreach (var reporter in dict_IdInfo)
+        {
+            var v = reporter.Value;
+            foreach (var reportId in v.reportList)
+            {
+                var isReported =
+                    dict_IdInfo[reportId].reportedCount >= k;
+                if (isReported) answer[v.index]++;
+            }
+        }
+
+        return answer;
+    }
+}
