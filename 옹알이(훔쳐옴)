@@ -1,0 +1,33 @@
+using System;
+
+public class Solution {
+    public int solution(string[] babbling)
+    {
+        string[] _str = { "aya", "ye", "woo", "ma" };
+        int answer = 0;
+        bool trigger;
+
+        foreach (string str in babbling)
+        {
+            trigger = false;
+            var split = str.Split(_str, StringSplitOptions.RemoveEmptyEntries); //조건 string에 포함되지 않은 문자열 검사
+
+            if (split.Length == 0)
+            {
+                for (int i = 0; i < _str.Length; i++)
+                {
+                    if (str.Contains(_str[i] + _str[i]))                        //연속 검사
+                    {
+                        trigger = true;
+                        break;
+                    }
+
+                }
+                if (!trigger)
+                    answer++;
+            }
+        }
+
+        return answer;
+    }
+}
