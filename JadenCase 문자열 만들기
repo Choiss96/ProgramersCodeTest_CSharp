@@ -1,0 +1,32 @@
+public class Solution {
+    public string solution(string s)
+    {
+        string answer = "";
+
+        string[] list = s.Split(' ');
+
+        for (int i = 0; i < list.Length; i++)
+        {
+            if (string.IsNullOrEmpty(list[i]))
+            {
+                answer += " ";
+                continue;
+            }
+
+            answer += " " + Func(list[i]);
+        }
+
+        return answer.Remove(0, 1);
+    }
+
+    private string Func(string str)
+    {
+        string str_F = "";
+
+        str = str.ToLower();
+        var upper = char.ToUpper(str[0]);
+        str = str.Remove(0,1).Insert(0, upper.ToString());
+
+        return str;
+    }
+}
