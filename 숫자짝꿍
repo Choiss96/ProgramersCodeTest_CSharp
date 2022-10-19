@@ -1,4 +1,8 @@
-string answer = "";
+using System;
+using System.Linq;
+public class Solution {
+    public string solution(string X, string Y) {
+        string answer = "";
         int[] x_num = new int[10];
         int[] y_num = new int[10];
 
@@ -24,3 +28,4 @@ string answer = "";
 
         return answer;
     }
+}
