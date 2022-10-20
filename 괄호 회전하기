@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+public class Solution {
+    const char open_Bracket_Big = '[';
+    const char open_Bracket_Mid = '{';
+    const char open_Bracket_Small = '(';
+    const char close_Bracket_Big = ']';
+    const char close_Bracket_Mid = '}';
+    const char close_Bracket_Small = ')';
+
+    public int solution(string s)
+    {
+        int answer = 0, index = 1;
+
+        if (Func(s)) answer++;
+        for (; index < s.Length; index++)
+        {
+            char temp = s[0];
+            s = s.Remove(0, 1);
+            s += temp;
+            if (Func(s)) answer++;
+        }
+        return answer;
+    }
+
+    private bool Func(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return false;
+
+        List<char> list = new List<char>();
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (list.Count == 0) { list.Add(s[i]); continue; }
+
+            if (s[i] == close_Bracket_Big)
+            {
+                if (list[list.Count - 1] == open_Bracket_Big)
+                    list.RemoveAt(list.Count - 1);
+                else return false;
+            }
+
+            else if (s[i] == close_Bracket_Mid)
+            {
+                if (list[list.Count - 1] == open_Bracket_Mid)
+                    list.RemoveAt(list.Count - 1);
+                else return false;
+            }
+
+            else if (s[i] == close_Bracket_Small)
+            {
+                if (list[list.Count - 1] == open_Bracket_Small)
+                    list.RemoveAt(list.Count - 1);
+                else return false;
+            }
+
+            else
+                list.Add(s[i]);
+        }
+
+        return list.Count == 0;
+    }
+}
