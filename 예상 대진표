@@ -1,0 +1,36 @@
+using System;
+
+class Solution
+{
+    public int solution(int n, int a, int b)
+    {
+        int a_Comp = a, b_Comp = b, round = 0;
+
+        while (a_Comp != b_Comp)
+        {
+            round++;
+            if (a % 2 == 0)
+            {
+                a_Comp = a - 1;
+                a /= 2;
+            }
+            else
+            {
+                a_Comp = a;
+                a = a / 2 + 1;
+            }
+            if (b % 2 == 0)
+            {
+                b_Comp = b - 1;
+                b /= 2;
+            }
+            else
+            {
+                b_Comp = b;
+                b = b / 2 + 1;
+            }
+        }
+
+        return round;
+    }
+}
