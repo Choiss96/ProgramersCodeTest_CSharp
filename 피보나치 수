@@ -1,0 +1,26 @@
+using System;
+public class Solution {
+    public long solution(int n)
+    {
+        int num = 1234567;
+        long result = 0;
+        int index = 2;
+        long[] arr = new long[2] { 0, 1 };
+
+        if (n == 0)
+            return 0;
+
+        if (n == 1)
+            return 1;
+
+        while (index <= n)
+        {
+            result = (arr[0] + arr[1]) % num;
+            arr[0] = arr[1] % num;
+            arr[1] = result;
+            index++;
+        }
+
+        return result;
+    }
+}
