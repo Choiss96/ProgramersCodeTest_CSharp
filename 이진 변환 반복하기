@@ -1,0 +1,18 @@
+using System;
+using System.Linq;
+
+public class Solution {
+    public int[] solution(string s)
+    {
+        int[] answer = new int[] { 0, 0 };
+        string[] str = new string[] { };
+        while (s != "1")
+        {
+            var rep = s.Replace("0", "");
+            answer[0]++; 
+            answer[1] += s.Length - rep.Length;
+            s = Convert.ToString(rep.Length, 2);
+        }
+        return answer;
+    }
+}
