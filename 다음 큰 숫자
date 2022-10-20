@@ -1,0 +1,18 @@
+using System;
+using System.Linq;
+
+class Solution 
+{
+    public int solution(int n)
+    {
+        int n_Num = Convert.ToString(n, 2).Where(w => w == '1').ToArray().Length;
+        
+        while(true)
+        {
+            n++;
+            if (n_Num == Convert.ToString(n, 2).Where(w => w == '1').ToArray().Length)
+                break;
+        }
+        return n;
+    }
+}
