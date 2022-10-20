@@ -1,0 +1,29 @@
+using System;
+public class Solution {
+    public int solution(int[] arr)
+    {
+        if (arr.Length == 1)
+            return arr[0];
+
+        int temp = arr[0];
+
+        for (int i = 1; i < arr.Length; i++)
+            temp = Func(temp, arr[i]);
+
+        return temp;
+    }
+
+    private int Func(int a, int b)
+    {
+        int mult = a * b;
+
+        while (b > 0)
+        {
+            int temp = a;
+            a = b;
+            b = temp % b;
+        }
+
+        return mult / a;
+    }
+}
