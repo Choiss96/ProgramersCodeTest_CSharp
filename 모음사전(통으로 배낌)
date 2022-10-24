@@ -1,0 +1,40 @@
+using System;
+
+public class Solution {
+    public int solution(string word)
+    {
+        int answer = 0;
+        string[] dictionary = { "A", "E", "I", "O", "U" };
+
+        int max = 0;
+        int length = dictionary.Length;
+        for (int i = 1; i <= length; i++)
+        {
+            max += (int)Math.Pow(length, i);
+        }
+
+        for (int i = 1; i <= word.Length; i++)
+        {
+            switch (word[i - 1])
+            {
+                case 'A':
+                    answer += 1;
+                    break;
+                case 'E':
+                    answer += max / (int)Math.Pow(length, i) * 1 + 1;
+                    break;
+                case 'I':
+                    answer += max / (int)Math.Pow(length, i) * 2 + 1;
+                    break;
+                case 'O':
+                    answer += max / (int)Math.Pow(length, i) * 3 + 1;
+                    break;
+                case 'U':
+                    answer += max / (int)Math.Pow(length, i) * 4 + 1;
+                    break;
+            }
+        }
+
+        return answer;
+    }
+}
