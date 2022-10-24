@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+public class Solution {
+    public int solution(int[] elements)
+    {
+        int answer = 0;
+        int length = elements.Length;
+
+        HashSet<int> hashSet = new HashSet<int>(elements);
+
+        Dictionary<int, int[]> dict = new Dictionary<int, int[]>();
+        dict.Add(1, elements);
+
+        for (int sumLen = 2; sumLen <= length; sumLen++)
+        {
+            dict.Add(sumLen, new int[length]);
+            for (int i = 0; i < length; i++)
+            {
+                int index = (i + sumLen - 1) % length;
+                int lastSum = dict[sumLen - 1][i];
+
+                int currentSum = lastSum + elements[index];
+                dict[sumLen][i] = currentSum;
+
+                hashSet.Add(currentSum);
+            }
+        }
+
+        answer = hashSet.Count;
+        return answer;
+    }
+}
