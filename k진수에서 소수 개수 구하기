@@ -1,0 +1,44 @@
+using System;
+using System.Linq;
+public class Solution {
+    public int solution(int n, int k)
+    {
+        int answer = 0;
+        string str = "";
+        
+        while (n > 0)
+        {
+            int div = n / k;
+            int mod = n % k;
+            str = mod.ToString() + str;
+            n = div;
+        }
+
+        string[] str_Arr = str.Split('0').ToArray();
+
+        long num;
+        bool trigger;
+        for (int i = 0; i < str_Arr.Length; i++)
+        {
+            if (str_Arr[i] == "")
+                continue;
+            num = long.Parse(str_Arr[i]);
+            trigger = false;
+            if (num == 1)
+                continue;
+
+            for (long j = 2; j * j <= num; j++)
+            {
+                if (num % j == 0)
+                {
+                    trigger = true;
+                    break;
+                }
+            }
+            if (!trigger)
+                answer++;
+        }
+
+        return answer;
+    }
+}
