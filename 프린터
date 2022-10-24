@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+public class Solution {
+    public int solution(int[] priorities, int location)
+    {
+        int answer = 0;
+        List<int[]> list = new List<int[]>();
+        List<int[]> sorted = new List<int[]>();
+
+        for (int i = 0; i < priorities.Length; i++)
+            list.Add(new int[] { i, priorities[i] });
+
+
+        int max;
+        while (list.Count != 0)
+        {
+            max = list.Max(m => m[1]);
+
+            if (max == list[0][1])
+            {
+                sorted.Add(list[0]);
+                list.RemoveAt(0);
+            }
+
+            else
+            {
+                //뒤로 보내는 코드
+                var temp = list[0];
+                list.RemoveAt(0);
+                list.Add(temp);
+            }
+        }
+
+        for (int i = 0; i < sorted.Count; i++)
+            if (sorted[i][0] == location)
+            {
+                answer = i;
+                break;
+            }
+
+        return answer + 1;
+    }
+}
